@@ -1,28 +1,44 @@
 #!/bin/bash
-#flip coin multiple and count
-read -p "how many time flip the coin: " n
+#flip coin multiple time till 21 either of them have won 21 time.
+target=21
+headsWon=0
+tailsWon=0
+flipCoin=0
 
-declare -a heads
-declare -a tails
+for ((x=1; x=1; x++))
 
-for ((x=1; x<=$n; x++))
+do 
 
-do
-
+((flipCoin++))
 result=$((RANDOM%2))
 
 if [ $result -eq 1 ]
 then
-echo HEADS
-heads[x]="HEADS"
+echo Heads
+((headsWon++))
 
 else
-echo TAILS
-tails[x]="TAILS"
+echo Tails
+((tailsWon++))
 
 fi
 
-done
 
-	echo "Heads Won ${#heads[@]} times"
-	echo "Tails won ${#tails[@]} times"
+if [ $headsWon == $target ] || [ $tailsWon == $target ]
+then 
+break
+fi
+
+done
+	echo "Heads Won is $headsWon"
+	echo "Tails Won is $tailsWon"
+
+if [ $headsWon -gt $tailsWon ]
+then
+echo "HEADS is Won. it won $headsWon times"
+elif [ $headsWon -lt $tailsWon ]
+then
+echo "TAILS is Won . it won $tailsWon times"
+else [ $headsWon -eq $tailsWon ]
+echo "its tie"
+fi
