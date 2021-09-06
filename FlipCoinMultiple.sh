@@ -1,10 +1,11 @@
+
 #!/bin/bash
 #flip coin multiple time till 21 either of them have won 21 time.
 target=21
 headsWon=0
 tailsWon=0
 flipCoin=0
-
+minimumdiff=2
 for ((x=1; x=1; x++))
 
 do 
@@ -23,9 +24,13 @@ echo Tails
 
 fi
 
-
-if [ $headsWon == $target ] || [ $tailsWon == $target ]
-then 
+differance=$(($headsWon - $tailsWon))
+if [ $headsWon == $target ] && [ $differance => $minimumdiff ]
+then
+echo "heads won by $differance point" 
+break
+else [ $tailsWon == $target ] && [ $differance => $minimumdiff ] 
+echo "tails won by $differance point"
 break
 fi
 
@@ -33,12 +38,4 @@ done
 	echo "Heads Won is $headsWon"
 	echo "Tails Won is $tailsWon"
 
-if [ $headsWon -gt $tailsWon ]
-then
-echo "HEADS is Won. it won $headsWon times"
-elif [ $headsWon -lt $tailsWon ]
-then
-echo "TAILS is Won . it won $tailsWon times"
-else [ $headsWon -eq $tailsWon ]
-echo "its tie"
-fi
+
